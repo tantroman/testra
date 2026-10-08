@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TESTRA // Developed by Tapan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(13, 18, 29, 0.85);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --card-hover-border: rgba(56, 189, 248, 0.55);
+      --cyan: #00f0ff;
+      --purple: #8b5cf6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(7, 9, 14, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+
+    .tagline-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 75%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subheading {
+      color: var(--text-muted);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      max-width: 650px;
+      margin: 0 auto 32px;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #050811;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(0, 240, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 50px 0;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title span {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      font-size: 1rem;
+    }
+
+    /* About Card */
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .pfp-wrapper {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      margin: 0 auto;
+    }
+
+    .pfp-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      z-index: 0;
+      filter: blur(6px);
+    }
+
+    .pfp-img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      z-index: 1;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: #0f172a;
+      display: block;
+    }
+
+    .about-details h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 20px;
+    }
+
+    .cyber-badge {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c4b5fd;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .cyber-badge.alt {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: rgba(0, 240, 255, 0.3);
+      color: var(--cyan);
+    }
+
+    .description-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .skill-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-4px);
+    }
+
+    .skill-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .skill-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      font-size: 1.1rem;
+    }
+
+    .skill-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .skill-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Terminal Box */
+    .terminal-box {
+      margin-top: 32px;
+      background: rgba(5, 8, 15, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+    }
+
+    .terminal-header {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .red { background: #ef4444; }
+    .yellow { background: #f59e0b; }
+    .green { background: #10b981; }
+
+    .terminal-body {
+      padding: 18px;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .terminal-prompt {
+      color: var(--cyan);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 36px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    footer span {
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media (max-width: 768px) {
+      .about-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 28px 20px;
+      }
+      .badge-bar {
+        justify-content: center;
+      }
+      .bullet-list li {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="container nav-content">
+      <div class="brand">
+        <span>TESTRA</span>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#system">Terminal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="tagline">
+        <div class="tagline-dot"></div>
+        SYSTEM OPERATIONAL // V1.0.4
+      </div>
+      <h1>
+        Crafting Intelligence on <br />
+        <span class="gradient-text">The Digital Frontier</span>
+      </h1>
+      <p class="subheading">
+        Engineered under project TESTRA. Architecting modern software solutions, systems, and exploratory tech.
+      </p>
+      <div class="action-row">
+        <a href="#about" class="btn btn-primary">
+          <i class="fa-solid fa-terminal"></i> Initialize About
+        </a>
+        <a href="#stack" class="btn btn-secondary">
+          <i class="fa-solid fa-layer-group"></i> Explore Stack
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="section-title">
+        <span>// 01.</span> IDENTITY & OVERVIEW
+      </div>
+
+      <div class="about-card">
+        <div class="pfp-wrapper">
+          <img src="profile.jpg" alt="Tapan Ram" class="pfp-img" onerror="this.src='https://images.unsplash.com/photo-1534972195531-a756b1126f25?auto=format&fit=crop&w=600&q=80'" />
+        </div>
+
+        <div class="about-details">
+          <h2>TAPAN RAM</h2>
+          
+          <div class="badge-bar">
+            <span class="cyber-badge alt">IMCA — CUSAT</span>
+            <span class="cyber-badge">Software Developer Under Development</span>
+          </div>
+
+          <div class="description-heading">
+            🌿 Building the Developer, One Commit at a Time
+          </div>
+
+          <ul class="bullet-list">
+            <li>
+              <span>🧑‍💻</span>
+              <span>Working with Python, C, and expanding into Kotlin.</span>
+            </li>
+            <li>
+              <span>🛠️</span>
+              <span>Standard stack: VS Code, Git, and Linux.</span>
+            </li>
+            <li>
+              <span>💬</span>
+              <span>Currently branching out into open-source contributions and cloud logic.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Architecture Section -->
+    <section id="stack">
+      <div class="section-title">
+        <span>// 02.</span> CORE ARCHITECTURE & STACK
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-header">
+            <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+            <div class="skill-title">Python Full Stack</div>
+          </div>
+          <div class="skill-desc">
+            Designing backend services, automation scripts, and full stack pipelines using modern Python frameworks and clean database integrations.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+            <div class="skill-title">Systems & C Engine</div>
+          </div>
+          <div class="skill-desc">
+            Deep dive into low-level computer architecture, structured memory workflows, pointers, and foundational algorithms using pure C.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <div class="skill-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div class="skill-title">Kotlin & Mobile</div>
+          </div>
+          <div class="skill-desc">
+            Expanding into modern Android application development and cross-platform native logic with Kotlin's expressive syntax.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <div class="skill-icon"><i class="fa-solid fa-cloud"></i></div>
+            <div class="skill-title">Linux & Cloud Logic</div>
+          </div>
+          <div class="skill-desc">
+            Terminal workflows, Git distributed version control, containerization fundamentals, and modern cloud deployment environments.
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal Window -->
+      <div class="terminal-box" id="system">
+        <div class="terminal-header">
+          <div class="circle red"></div>
+          <div class="circle yellow"></div>
+          <div class="circle green"></div>
+          <span style="margin-left: 8px; color: var(--text-muted); font-size: 0.78rem;">bash — session: testra-node-01</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="terminal-prompt">tapan@cusat:~$</span> testra --status</div>
+          <div style="color: #64748b;">[SYS_INFO] Loading profile configurations...</div>
+          <div style="color: #38bdf8;">✓ Core identity verified: Tapan Ram</div>
+          <div style="color: #38bdf8;">✓ Academic node: Cochin University of Science and Technology (IMCA)</div>
+          <div style="color: #38bdf8;">✓ Active stacks: Python | C | Kotlin | Linux Environment</div>
+          <div style="color: #34d399;">✓ Status: System compiling, commits active.</div>
+          <div><span class="terminal-prompt">tapan@cusat:~$</span> <span id="cursor">█</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      TESTRA // Designed & Developed by <span>Tapan</span>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      setInterval(() => {
+        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+      }, 500);
+    }
+  </script>
+</body>
+</html>
